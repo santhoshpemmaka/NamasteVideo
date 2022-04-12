@@ -14,13 +14,13 @@ const ActionButtonVideocard = () => {
 					<button
 						className='video-action-label'
 						onClick={() => setshowList((prev) => !prev)}>
-						<i class='fas fa-clock'></i>
+						<i className='fas fa-clock'></i>
 						Add to Watch Later
 					</button>
 					<button
 						className='video-action-label'
 						onClick={() => setshowList((prev) => !prev)}>
-						<i class='fas fa-play-circle'></i>
+						<i className='fas fa-play-circle'></i>
 						Add to Play List
 					</button>
 				</div>
