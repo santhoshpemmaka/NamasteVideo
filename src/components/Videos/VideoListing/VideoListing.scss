@@ -1,0 +1,117 @@
+.video-listing-container {
+	width: 85%;
+	padding: 1rem;
+	.nav-filter-options {
+		display: flex;
+		font-size: 1.6rem;
+		margin-left: 2rem;
+		.nav-filter-option {
+			padding: 0.5rem 2rem;
+			width: fit-content;
+			border: 1px solid var(--dark-primary-color);
+			margin: 0 1rem;
+			border-radius: 1rem;
+			color: var(--primary-color);
+			letter-spacing: 0.15rem;
+		}
+		.active {
+			background-color: var(--primary-color);
+			color: var(--complimentary-text-color);
+		}
+	}
+	.video-listing-sortoption {
+		margin-left: 2rem;
+		padding: 0.5rem 1rem;
+		font-size: 1.8rem;
+		color: var(--primary-text-color);
+		margin-top: 1.5rem;
+		label {
+			margin-left: 1rem;
+			text-decoration: underline;
+			cursor: pointer;
+			font-weight: 500;
+		}
+	}
+	.video-grid-layout {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 3rem;
+		width: 100%;
+		max-width: 60rem;
+		padding: 1rem 1remrem;
+		padding: 1rem 1rem;
+
+		.video-card {
+			width: 34rem;
+			margin-left: 3rem;
+			position: relative;
+			margin-top: 1rem;
+			box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+			cursor: pointer;
+			border-radius: 0.625rem;
+			.video-card-response {
+				width: 100%;
+				height: auto;
+			}
+			.video-desc {
+				font-size: 1.6rem;
+				color: var(--primary-text-color);
+				padding: 1rem 0.5rem;
+				cursor: pointer;
+				.video-desc-labels {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding: 0.5rem 1rem;
+					margin-right: 1rem;
+					.video-label-ellipses {
+						width: 25rem;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+					.action-btn-container {
+						position: relative;
+						.btn-action-video {
+							border: none;
+						}
+						.playlist-container {
+							position: absolute;
+							width: 20rem;
+							height: 7rem;
+							z-index: 1;
+							background: #fff7f9;
+							right: 1.5rem;
+							bottom: 0;
+							top: 0.5rem;
+							border: 2px solid var(--border-color);
+							border-radius: 0.625rem;
+							padding: 0.5rem;
+							color: var(--primary-text-color);
+							.video-action-label {
+								border: none;
+								display: flex;
+								font-size: 1.4rem;
+								padding: 0.5rem 1rem;
+								align-items: center;
+								background-color: inherit;
+								color: var(--primary-text-color);
+								width: 100%;
+								i {
+									margin-right: 2rem;
+								}
+								&:hover {
+									color: var(--primary-color);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+    .spacer-3rem{
+        height: 4rem;
+        width: 100%;
+    }
+}

@@ -1,8 +1,14 @@
-import "./App.css";
+import React from "react";
+import "./App.scss";
+import {Header} from "./components/Header";
+import Footer from "./components/Footer/Footer";
+import VideosPage from "./components/Videos/VideosPage";
 function App() {
 	return (
 		<div className='App'>
-			<h1>NeoG Level One Exericses</h1>
+			<Header />
+			<VideosPage />
+			<Footer />
 		</div>
 	);
 }
