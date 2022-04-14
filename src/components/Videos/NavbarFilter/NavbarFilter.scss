@@ -1,0 +1,28 @@
+.navbarfilter-container{
+	width: 15%;
+	padding: 01rem 1rem;
+    color: var(--primary-text-color);
+    border-right: 3px solid var(--border-color);
+    overflow-y: auto;
+    margin-left: 1rem;
+    cursor: pointer;
+    
+    .sidebar-options{
+        color: var(--primary-text-color);
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        label{
+            cursor: pointer;
+            margin-left: 2rem;
+        }
+    }
+    .active{
+        background-color: var(--nav-background-color);
+        border-radius: 0.625rem;
+    }
+}
