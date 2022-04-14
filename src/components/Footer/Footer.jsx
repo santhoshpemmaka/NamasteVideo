@@ -25,18 +25,16 @@ const Footer = () => {
 				</div>
 				{footerItems && (
 					<ul className='ul-tag-footer ul-footer'>
-						{footerItems &&
-							footerItems.length > 0 &&
-							footerItems.map((footer_item) => (
-								<li key={footer_item.link_name}>
-									<a
-										className='a-tag-header'
-										href={footer_item.link_name}
-										target='_blank'>
-										<i className={footer_item.icon_name}></i>
-									</a>
-								</li>
-							))}
+						{footerItems.map((footer_item) => (
+							<li key={footer_item.link_name}>
+								<a
+									className='a-tag-header'
+									href={footer_item.link_name}
+									target='_blank'>
+									<i className={footer_item.icon_name}></i>
+								</a>
+							</li>
+						))}
 					</ul>
 				)}
 
