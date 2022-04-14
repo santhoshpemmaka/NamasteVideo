@@ -1,0 +1,5 @@
+export const ACTION_TYPE = {
+	INIT_VIDEOS: "INIT_VIDEOS",
+	SORT_BY: "SORT_BY",
+	SORTBY_DATE: "SORTBY_DATE",
+};

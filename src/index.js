@@ -5,12 +5,15 @@ import App from "./App";
 import {Mock} from "./Mock";
 import {makeServer} from "./server";
 import {BrowserRouter as Router} from "react-router-dom";
+import {DataProvider} from "./context/VideoContext";
 
 makeServer();
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-			<App />
+			<DataProvider>
+				<App />
+			</DataProvider>
 		</Router>
 	</React.StrictMode>,
 	document.getElementById("root")
