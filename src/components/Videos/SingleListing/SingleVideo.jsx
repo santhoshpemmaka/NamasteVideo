@@ -1,12 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 import "./SingleVideo.scss";
-import {useParams} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import {useData} from "../../../context/VideoContext";
+import {useAuthentication} from "../../../context/AuthContext";
+import {ACTION_TYPE} from "../../../constants/constant";
+import {
+	removeFromWatchLater,
+	addToWatchLater,
+} from "../../../utils/server-request";
 
 const SingleVideo = () => {
 	const {videoId} = useParams();
+	const navigate = useNavigate();
 	const {state, dispatch} = useData();
+	const [commentInput, setcommentInput] = useState("");
+	const {
+		state: {token, userName},
+	} = useAuthentication();
 	const video = state?.videos.find((video) => video._id === videoId);
+	const clearHandler = () => {
+		setcommentInput("");
+	};
+
+	const commentHandler = () => {
+		const commentObj = {
+			user: userName,
+			comment: commentInput,
+		};
+		dispatch({type: ACTION_TYPE.ADD_COMMENT, payload: {videoId, commentObj}});
+		setcommentInput("");
+	};
+
+	const watchHandler = () => {
+		token
+			? video?.isInWatchLater
+				? removeFromWatchLater(dispatch, video, token)
+				: addToWatchLater(dispatch, video, token)
+			: navigate("/login");
+	};
 	return video ? (
 		<div className='single-video'>
 			<iframe
@@ -23,19 +54,25 @@ const SingleVideo = () => {
 					<h4>{video.creator}</h4>
 				</div>
 				<div className='video-options'>
-					<div className='video-option'>
+					<div className='video-option-inselect'>
 						<i className='fas fa-thumbs-up'></i>
 						<label>Like</label>
 					</div>
-					<div className='video-option'>
+					<div
+						className={
+							video?.isInWatchLater
+								? "video-option-select"
+								: "video-option-inselect"
+						}
+						onClick={() => watchHandler()}>
 						<i className='fas fa-clock'></i>
 						<label>Watch Later</label>
 					</div>
-					<div className='video-option'>
+					<div className='video-option-inselect'>
 						<i className='fas fa-copy'></i>
 						<label>Copy</label>
 					</div>
-					<div className='video-option'>
+					<div className='video-option-inselect'>
 						<i className='fas fa-share-alt'></i>
 						<label>Share</label>
 					</div>
@@ -46,26 +83,38 @@ const SingleVideo = () => {
 				</div>
 				<div className='video-comments'>
 					<div className='video-comments-label'>
-						<i class='fas fa-align-left'></i>
+						<i className='fas fa-align-left'></i>
 						<label>Comments :</label>
 					</div>
 					<div className='video-comments-input'>
-						<span>S</span>
-						<input type='text' placeholder='Add a comment...' />
-						<button>Clear</button>
-						<button>Comment</button>
+						<span>{userName.charAt(0).toUpperCase()}</span>
+						<input
+							type='text'
+							value={commentInput}
+							onChange={(e) => setcommentInput(e.target.value)}
+							placeholder='Add a comment...'
+							onClick={() => !token && navigate("/login")}
+						/>
+						<button onClick={() => clearHandler()}>Clear</button>
+						<button
+							onClick={() => commentHandler()}
+							disabled={commentInput.length === 0}>
+							Comment
+						</button>
 					</div>
-					<div className='video-user-comments'>
-						<span>T</span>
-						<div className='video-user-comment'>
-							<label className='video-user-comment-name'>Test User</label>
-							<label>
-								In publishing and graphic design, Lorem ipsum is a placeholder
-								text commonly used to demonstrate the visual form of a document
-								or a typeface without relying on meaningful content.
-							</label>
-						</div>
-					</div>
+					{video?.comments
+						.slice(0, video.comments.length - 1)
+						.map((user_comment) => (
+							<div className='video-user-comments' key={user_comment.comment}>
+								<span>{user_comment?.user?.charAt(0).toUpperCase()}</span>
+								<div className='video-user-comment'>
+									<label className='video-user-comment-name'>
+										{user_comment?.user}
+									</label>
+									<label>{user_comment?.comment}</label>
+								</div>
+							</div>
+						))}
 				</div>
 			</div>
 		</div>

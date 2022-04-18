@@ -1,12 +1,18 @@
 import React, {useEffect} from "react";
 import "./App.scss";
 import {Routes, Route} from "react-router-dom";
-import {Header} from "./components/Header";
-import Footer from "./components/Footer/Footer";
-import {VideosPage} from "./components/Videos/VideoListing";
-import {SingleListing} from "./components/Videos/SingleListing";
+import {
+	VideosPage,
+	SingleListing,
+	Footer,
+	Header,
+	Login,
+	SignUp,
+	WatchLater,
+} from "./components";
 import {useData} from "./context/VideoContext";
 import {getVideosServer} from "./utils/server-request";
+
 function App() {
 	const {state, dispatch} = useData();
 	useEffect(() => {
@@ -18,6 +24,9 @@ function App() {
 			<Routes>
 				<Route path='/' element={<VideosPage />} />
 				<Route path='/video/:videoId' element={<SingleListing />} />
+				<Route path='/watchlater' element={<WatchLater />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/signup' element={<SignUp />} />
 			</Routes>
 			<Footer />
 		</div>

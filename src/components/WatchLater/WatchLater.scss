@@ -1,0 +1,33 @@
+.watchlater-container {
+	width: 100%;
+	display: flex;
+	grid-area: main;
+	.watchlist-container {
+		width: 85%;
+		padding: 1rem;
+		.watchlist-heading {
+			display: flex;
+			align-items: center;
+			font-size: 1.6rem;
+			color: var(--primary-text-color);
+			margin-left: 4rem;
+            label{
+                margin-left: 2rem;
+                font-weight: 500;
+            }
+		}
+		.video-grid-layout {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-gap: 3rem;
+			width: 100%;
+			max-width: 60rem;
+			padding: 1rem 1remrem;
+			padding: 1rem 1rem;
+		}
+	}
+	.spacer-3rem {
+		height: 4rem;
+		width: 100%;
+	}
+}

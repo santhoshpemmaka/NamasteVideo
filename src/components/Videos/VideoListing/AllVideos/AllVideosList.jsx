@@ -22,7 +22,7 @@ const AllVideosList = ({video}) => {
 					<div className='video-desc'>
 						<div className='video-desc-labels'>
 							<label className='video-label-ellipses'>{video.title}</label>
-							<ActionButtonVideocard vide={video} />
+							<ActionButtonVideocard video={video} />
 						</div>
 						<div className='video-desc-labels'>
 							<label>{video.creator}</label>

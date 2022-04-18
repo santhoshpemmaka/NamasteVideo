@@ -5,15 +5,20 @@ import App from "./App";
 import {Mock} from "./Mock";
 import {makeServer} from "./server";
 import {BrowserRouter as Router} from "react-router-dom";
-import {DataProvider} from "./context/VideoContext";
+import {DataProvider, AuthenticationProvider} from "./context";
+import ScrollTop from "./ScrollTop";
 
 makeServer();
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-			<DataProvider>
-				<App />
-			</DataProvider>
+			<AuthenticationProvider>
+				<DataProvider>
+					<ScrollTop />
+					<App />
+					{/* <Mock /> */}
+				</DataProvider>
+			</AuthenticationProvider>
 		</Router>
 	</React.StrictMode>,
 	document.getElementById("root")

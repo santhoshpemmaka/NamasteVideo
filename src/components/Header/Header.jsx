@@ -1,17 +1,13 @@
 import React, {useState} from "react";
 import "./Header.scss";
 import {Link, NavLink, useNavigate} from "react-router-dom";
-// import {useStateContext} from "../../../Context/StateProvider";
-// import {useAuthentication} from "../../../Context/AuthContext";
+import {useAuthentication} from "../../context/AuthContext";
 const Header = () => {
 	const [showNav, setshowNav] = useState(false);
-	// const {state} = useStateContext();
-	// const {itemInCart, itemInWishList} = state;
-	// const navigate = useNavigate();
-	// const {
-	// 	state: {token, userName},
-	// 	logoutUser,
-	// } = useAuthentication();
+	const {
+		state: {token, userName},
+		logoutUser,
+	} = useAuthentication();
 	const navItems = [{text: "Home", link: "/", hideInDesktop: false}];
 	const navHandler = () => {
 		setshowNav((prev) => !prev);
@@ -75,12 +71,21 @@ const Header = () => {
 						/>
 					</div>
 					<ul className='ul-tag-header ul-right'>
-						<li className='li-tag-header hide-in-mobile'>
-							<Link className='a-tag-header-right' to='/login'>
+						{token ? (
+							<li
+								className='li-tag-header hide-in-mobile a-tag-header-right'
+								onClick={() => logoutUser()}>
 								<i className='fas fa-user header-icon'></i>
-								<span>Login</span>
-							</Link>
-						</li>
+								<span>{userName}</span>
+							</li>
+						) : (
+							<li className='li-tag-header hide-in-mobile'>
+								<Link className='a-tag-header-right' to='/login'>
+									<i className='fas fa-user header-icon'></i>
+									<span>Login</span>
+								</Link>
+							</li>
+						)}
 					</ul>
 				</div>
 			</div>

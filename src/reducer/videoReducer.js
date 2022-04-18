@@ -33,6 +33,29 @@ export const videoReducer = (state, action) => {
 				sortByDate: !state.sortByDate,
 			};
 
+		case ACTION_TYPE.ADD_COMMENT:
+			const {videoId, commentObj} = action.payload;
+			return {
+				...state,
+				videos: [
+					...state.videos.map((video) =>
+						video._id === videoId
+							? {...video, comments: [commentObj, ...video.comments]}
+							: {...video}
+					),
+				],
+			};
+
+		case ACTION_TYPE.WATCH_LATER:
+			return {
+				...state,
+				videos: state.videos.map((video) => ({
+					...video,
+					isInWatchLater: action.payload.some(
+						(element) => element._id === video._id
+					),
+				})),
+			};
 		default:
 			return state;
 	}
