@@ -13,6 +13,7 @@
 			border-radius: 1rem;
 			color: var(--primary-color);
 			letter-spacing: 0.15rem;
+            cursor: pointer;
 		}
 		.active {
 			background-color: var(--primary-color);
@@ -88,21 +89,22 @@
 							border-radius: 0.625rem;
 							padding: 0.5rem;
 							color: var(--primary-text-color);
-							.video-action-label {
+							.video-action-label-active {
 								border: none;
 								display: flex;
 								font-size: 1.4rem;
 								padding: 0.5rem 1rem;
 								align-items: center;
 								background-color: inherit;
-								color: var(--primary-text-color);
+								color: var(--primary-color);
 								width: 100%;
 								i {
 									margin-right: 2rem;
 								}
-								&:hover {
-									color: var(--primary-color);
-								}
+							}
+							.video-action-label-inactive {
+								@extend .video-action-label-active;
+								color: var(--primary-text-color);
 							}
 						}
 					}

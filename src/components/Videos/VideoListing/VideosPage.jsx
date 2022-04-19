@@ -1,6 +1,6 @@
 import React from "react";
-import NavbarFilter from "./NavbarFilter/NavbarFilter";
-import VideoListing from "./VideoListing/VideoListing";
+import NavbarFilter from "../NavbarFilter/NavbarFilter";
+import VideoListing from "./VideoListing";
 import "./VideosPage.scss";
 
 const VideosPage = () => {

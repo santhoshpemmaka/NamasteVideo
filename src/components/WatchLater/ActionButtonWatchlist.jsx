@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router";
-import {useAuthentication} from "../../../../context/AuthContext";
-import {useData} from "../../../../context/VideoContext";
 import {
 	addToWatchLater,
 	removeFromWatchLater,
-} from "../../../../utils/server-request";
+} from "../../utils/server-request";
+import {useAuthentication} from "../../context/AuthContext";
+import {useData} from "../../context/VideoContext";
 
 const ActionButtonVideocard = ({video}) => {
 	const [showList, setshowList] = useState(false);
