@@ -56,6 +56,29 @@ export const videoReducer = (state, action) => {
 					),
 				})),
 			};
+
+		case ACTION_TYPE.LIKE_VIDEO:
+			return {
+				...state,
+				videos: state.videos.map((video) => ({
+					...video,
+					isInLiked: action.payload.some(
+						(element) => element._id === video._id
+					),
+				})),
+			};
+
+		case ACTION_TYPE.HISTORY_VIDEO:
+			return {
+				...state,
+				videos: state.videos.map((video) => ({
+					...video,
+					isInHistory: action.payload.some(
+						(element) => element._id === video._id
+					),
+				})),
+			};
+
 		default:
 			return state;
 	}

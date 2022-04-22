@@ -9,6 +9,8 @@ import {
 	Login,
 	SignUp,
 	WatchLater,
+	LikevideoListing,
+	HistoryVideoListing,
 } from "./components";
 import {useData} from "./context/VideoContext";
 import {getVideosServer} from "./utils/server-request";
@@ -27,6 +29,8 @@ function App() {
 				<Route path='/watchlater' element={<WatchLater />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/signup' element={<SignUp />} />
+				<Route path='/liked' element={<LikevideoListing />} />
+				<Route path='/history' element={<HistoryVideoListing />} />
 			</Routes>
 			<Footer />
 		</div>

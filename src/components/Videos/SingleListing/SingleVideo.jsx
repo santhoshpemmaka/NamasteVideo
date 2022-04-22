@@ -7,6 +7,8 @@ import {ACTION_TYPE} from "../../../constants/constant";
 import {
 	removeFromWatchLater,
 	addToWatchLater,
+	addTolikeVideo,
+	removeFromlikeVideo,
 } from "../../../utils/server-request";
 
 const SingleVideo = () => {
@@ -18,6 +20,7 @@ const SingleVideo = () => {
 		state: {token, userName},
 	} = useAuthentication();
 	const video = state?.videos.find((video) => video._id === videoId);
+
 	const clearHandler = () => {
 		setcommentInput("");
 	};
@@ -38,6 +41,15 @@ const SingleVideo = () => {
 				: addToWatchLater(dispatch, video, token)
 			: navigate("/login");
 	};
+
+	const likeHandler = () => {
+		token
+			? video?.isInLiked
+				? removeFromlikeVideo(dispatch, video, token)
+				: addTolikeVideo(dispatch, video, token)
+			: navigate("/login");
+	};
+
 	return video ? (
 		<div className='single-video'>
 			<iframe
@@ -54,7 +66,11 @@ const SingleVideo = () => {
 					<h4>{video.creator}</h4>
 				</div>
 				<div className='video-options'>
-					<div className='video-option-inselect'>
+					<div
+						className={
+							video?.isInLiked ? "video-option-select" : "video-option-inselect"
+						}
+						onClick={() => likeHandler()}>
 						<i className='fas fa-thumbs-up'></i>
 						<label>Like</label>
 					</div>

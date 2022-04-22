@@ -47,3 +47,73 @@ export const addToWatchLater = async (dispatch, video, token) => {
 		console.log("Err", error);
 	}
 };
+
+export const addTolikeVideo = async (dispatch, video, token) => {
+	try {
+		const config = {headers: {authorization: token}};
+		const response = await axios.post("/api/user/likes", {video}, config);
+		if (response.status === 200 || response.status === 201) {
+			dispatch({
+				type: ACTION_TYPE.LIKE_VIDEO,
+				payload: response?.data?.likes,
+			});
+		} else {
+			throw new Error("Failed add to like video");
+		}
+	} catch (error) {
+		console.log("Error", error);
+	}
+};
+
+export const removeFromlikeVideo = async (dispatch, video, token) => {
+	try {
+		const {_id} = video;
+		const config = {headers: {authorization: token}};
+		const response = await axios.delete(`/api/user/likes/${_id}`, config);
+		if (response.status === 200 || response.status === 201) {
+			dispatch({
+				type: ACTION_TYPE.LIKE_VIDEO,
+				payload: response?.data?.likes,
+			});
+		} else {
+			throw new Error("Failed remove to like video");
+		}
+	} catch (error) {
+		console.log("Error", error);
+	}
+};
+
+export const addToHistoryVideo = async (dispatch, video, token) => {
+	try {
+		const config = {headers: {authorization: token}};
+		const response = await axios.post("/api/user/history", {video}, config);
+		if (response.status === 200 || response.status === 201) {
+			dispatch({
+				type: ACTION_TYPE.HISTORY_VIDEO,
+				payload: response?.data?.history,
+			});
+		} else {
+			throw new Error("Failed add to history video");
+		}
+	} catch (error) {
+		console.log("Err", error);
+	}
+};
+
+export const removeFromHistoryVideo = async (dispatch, video, token) => {
+	try {
+		const {_id} = video;
+		const config = {headers: {authorization: token}};
+		const response = await axios.delete(`/api/user/history/${_id}`, config);
+		if (response.status === 200 || response.status === 201) {
+			dispatch({
+				type: ACTION_TYPE.HISTORY_VIDEO,
+				payload: response?.data.history,
+			});
+		} else {
+			throw new Error("Failed remove from history video");
+		}
+	} catch (error) {
+		console.log("Err", error);
+	}
+};
