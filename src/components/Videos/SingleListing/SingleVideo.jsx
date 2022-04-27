@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./SingleVideo.scss";
-import {useParams, useNavigate} from "react-router-dom";
+import {useParams, useNavigate, useLocation, Navigate} from "react-router-dom";
 import {useData} from "../../../context/VideoContext";
 import {useAuthentication} from "../../../context/AuthContext";
 import {ACTION_TYPE} from "../../../constants/constant";
@@ -12,8 +12,9 @@ import {
 } from "../../../utils/server-request";
 
 const SingleVideo = () => {
+	const location = useLocation();
 	const {videoId} = useParams();
-	const navigate = useNavigate();
+	const navigation = useNavigate();
 	const {state, dispatch} = useData();
 	const [commentInput, setcommentInput] = useState("");
 	const {
@@ -39,7 +40,7 @@ const SingleVideo = () => {
 			? video?.isInWatchLater
 				? removeFromWatchLater(dispatch, video, token)
 				: addToWatchLater(dispatch, video, token)
-			: navigate("/login");
+			: navigation("/login");
 	};
 
 	const likeHandler = () => {
@@ -47,7 +48,7 @@ const SingleVideo = () => {
 			? video?.isInLiked
 				? removeFromlikeVideo(dispatch, video, token)
 				: addTolikeVideo(dispatch, video, token)
-			: navigate("/login");
+			: navigation("/login", {replace: true, state: {from: location}});
 	};
 
 	return video ? (
@@ -103,13 +104,13 @@ const SingleVideo = () => {
 						<label>Comments :</label>
 					</div>
 					<div className='video-comments-input'>
-						<span>{userName.charAt(0).toUpperCase()}</span>
+						<span>{userName.charAt(0).toUpperCase() || "T"}</span>
 						<input
 							type='text'
 							value={commentInput}
 							onChange={(e) => setcommentInput(e.target.value)}
 							placeholder='Add a comment...'
-							onClick={() => !token && navigate("/login")}
+							onClick={() => !token && navigation("/login")}
 						/>
 						<button onClick={() => clearHandler()}>Clear</button>
 						<button

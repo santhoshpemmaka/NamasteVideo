@@ -28,7 +28,7 @@ const HistoryVideoListing = () => {
 					</div>
 				) : (
 					<div className='empty-conatiner'>
-						<label>Looks like you haven't liked videos anything yet. </label>
+						<label>Looks like you haven't history videos anything yet. </label>
 						<Link to='/'>
 							<button className='empty-list-button'>Start Adding Now</button>
 						</Link>

@@ -72,11 +72,11 @@ const Header = () => {
 					</div>
 					<ul className='ul-tag-header ul-right'>
 						{token ? (
-							<li
-								className='li-tag-header hide-in-mobile a-tag-header-right'
-								onClick={() => logoutUser()}>
-								<i className='fas fa-user header-icon'></i>
-								<span>{userName}</span>
+							<li className='li-tag-header hide-in-mobile'>
+								<Link className='a-tag-header-right' to='/profile'>
+									<i className='fas fa-user header-icon'></i>
+									<span>Hi, {userName}</span>
+								</Link>
 							</li>
 						) : (
 							<li className='li-tag-header hide-in-mobile'>

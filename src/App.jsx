@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import "./App.scss";
 import {Routes, Route} from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 import {
 	VideosPage,
 	SingleListing,
@@ -11,6 +12,8 @@ import {
 	WatchLater,
 	LikevideoListing,
 	HistoryVideoListing,
+	PlaylistVideoListing,
+	ProfileListing,
 } from "./components";
 import {useData} from "./context/VideoContext";
 import {getVideosServer} from "./utils/server-request";
@@ -26,11 +29,48 @@ function App() {
 			<Routes>
 				<Route path='/' element={<VideosPage />} />
 				<Route path='/video/:videoId' element={<SingleListing />} />
-				<Route path='/watchlater' element={<WatchLater />} />
+				<Route
+					path='/watchlater'
+					element={
+						<PrivateRoute>
+							<WatchLater />
+						</PrivateRoute>
+					}
+				/>
 				<Route path='/login' element={<Login />} />
 				<Route path='/signup' element={<SignUp />} />
-				<Route path='/liked' element={<LikevideoListing />} />
-				<Route path='/history' element={<HistoryVideoListing />} />
+				<Route
+					path='/liked'
+					element={
+						<PrivateRoute>
+							<LikevideoListing />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/history'
+					element={
+						<PrivateRoute>
+							<HistoryVideoListing />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/profile'
+					element={
+						<PrivateRoute>
+							<ProfileListing />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/playlist'
+					element={
+						<PrivateRoute>
+							<PlaylistVideoListing />
+						</PrivateRoute>
+					}
+				/>
 			</Routes>
 			<Footer />
 		</div>

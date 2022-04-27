@@ -7,6 +7,8 @@ import SignUp from "./SignUp/SignUp";
 import WatchLater from "./WatchLater/WatchLater";
 import LikevideoListing from "./LikeVideo/LikevideoListing";
 import HistoryVideoListing from "./HistoryVideo/HistoryVideoListing";
+import PlaylistVideoListing from "./Playlist/PlaylistVideoListing";
+import ProfileListing from "./Profile/ProfileListing";
 
 export {
 	VideosPage,
@@ -18,4 +20,6 @@ export {
 	WatchLater,
 	LikevideoListing,
 	HistoryVideoListing,
+	PlaylistVideoListing,
+	ProfileListing,
 };
