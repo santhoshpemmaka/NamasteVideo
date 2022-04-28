@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import "./App.scss";
 import {Routes, Route} from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import {ToastContainer, toast} from "react-toastify";
 import {
 	VideosPage,
 	SingleListing,
@@ -26,6 +27,7 @@ function App() {
 	return (
 		<div className='App'>
 			<Header />
+			<ToastContainer />
 			<Routes>
 				<Route path='/' element={<VideosPage />} />
 				<Route path='/video/:videoId' element={<SingleListing />} />

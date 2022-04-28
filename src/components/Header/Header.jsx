@@ -1,16 +1,24 @@
 import React, {useState} from "react";
 import "./Header.scss";
-import {Link, NavLink, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useAuthentication} from "../../context/AuthContext";
+import {useData} from "../../context/VideoContext";
+import {ACTION_TYPE} from "../../constants/constant";
 const Header = () => {
 	const [showNav, setshowNav] = useState(false);
+	const {dispatch} = useData();
+	const [searchtext, setSearchtext] = useState("");
 	const {
 		state: {token, userName},
-		logoutUser,
 	} = useAuthentication();
 	const navItems = [{text: "Home", link: "/", hideInDesktop: false}];
 	const navHandler = () => {
 		setshowNav((prev) => !prev);
+	};
+	const searchHandler = (e) => {
+		if (e.key === "Enter" || e.keyCode === 8 || e.target.value) {
+			dispatch({type: ACTION_TYPE.SEARCH, payload: searchtext});
+		}
 	};
 	return (
 		<div className='container grid-layout'>
@@ -68,6 +76,8 @@ const Header = () => {
 							type='text'
 							className='search-text'
 							placeholder='Search for videos'
+							onChange={(e) => setSearchtext(e.target.value)}
+							onKeyDown={(e) => searchHandler(e)}
 						/>
 					</div>
 					<ul className='ul-tag-header ul-right'>

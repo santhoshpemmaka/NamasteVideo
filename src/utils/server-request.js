@@ -1,5 +1,11 @@
 import axios from "axios";
 import {ACTION_TYPE} from "../constants/constant";
+import {
+	addToLikeToastify,
+	addToWatchLaterToastify,
+	removeToLikeToastify,
+	removeToWatchLaterToastify,
+} from "./Toastify";
 
 export const getVideosServer = async (dispatch) => {
 	try {
@@ -25,6 +31,7 @@ export const removeFromWatchLater = async (dispatch, video, token) => {
 				type: ACTION_TYPE.WATCH_LATER,
 				payload: resposne?.data?.watchlater,
 			});
+			removeToWatchLaterToastify("Removed From Watch Later Video");
 		}
 	} catch (error) {
 		console.log("Error", error);
@@ -40,6 +47,7 @@ export const addToWatchLater = async (dispatch, video, token) => {
 				type: ACTION_TYPE.WATCH_LATER,
 				payload: response?.data?.watchlater,
 			});
+			addToWatchLaterToastify("Added To Watch Later Video");
 		} else {
 			throw new Error("Failed add to watch later");
 		}
@@ -57,6 +65,7 @@ export const addTolikeVideo = async (dispatch, video, token) => {
 				type: ACTION_TYPE.LIKE_VIDEO,
 				payload: response?.data?.likes,
 			});
+			addToLikeToastify("Added To Like Video");
 		} else {
 			throw new Error("Failed add to like video");
 		}
@@ -75,6 +84,7 @@ export const removeFromlikeVideo = async (dispatch, video, token) => {
 				type: ACTION_TYPE.LIKE_VIDEO,
 				payload: response?.data?.likes,
 			});
+			removeToLikeToastify("Remove To Like Video");
 		} else {
 			throw new Error("Failed remove to like video");
 		}
