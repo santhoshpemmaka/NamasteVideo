@@ -1,12 +1,22 @@
 import React from "react";
 import ActionButtonVideocard from "./ActionButtonVideocard";
 import {useNavigate} from "react-router-dom";
+import {useAuthentication} from "../../../../context/AuthContext";
+import {useData} from "../../../../context/VideoContext";
+import {addToHistoryVideo} from "../../../../utils/server-request";
 
 const AllVideosList = ({video}) => {
 	const navigate = useNavigate();
+	const {
+		state: {token},
+	} = useAuthentication();
+	const {state, dispatch} = useData();
 
 	const videocardhandler = () => {
 		navigate(`/video/${video._id}`);
+		token
+			? !video.isInHistory && addToHistoryVideo(dispatch, video, token)
+			: navigate("/login");
 	};
 
 	return (

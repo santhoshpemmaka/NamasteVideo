@@ -1,23 +1,27 @@
 import React, {useState} from "react";
 import "./SingleVideo.scss";
-import {useParams, useNavigate} from "react-router-dom";
+import {useParams, useNavigate, useLocation, Navigate} from "react-router-dom";
 import {useData} from "../../../context/VideoContext";
 import {useAuthentication} from "../../../context/AuthContext";
 import {ACTION_TYPE} from "../../../constants/constant";
 import {
 	removeFromWatchLater,
 	addToWatchLater,
+	addTolikeVideo,
+	removeFromlikeVideo,
 } from "../../../utils/server-request";
 
 const SingleVideo = () => {
+	const location = useLocation();
 	const {videoId} = useParams();
-	const navigate = useNavigate();
+	const navigation = useNavigate();
 	const {state, dispatch} = useData();
 	const [commentInput, setcommentInput] = useState("");
 	const {
 		state: {token, userName},
 	} = useAuthentication();
 	const video = state?.videos.find((video) => video._id === videoId);
+
 	const clearHandler = () => {
 		setcommentInput("");
 	};
@@ -36,8 +40,17 @@ const SingleVideo = () => {
 			? video?.isInWatchLater
 				? removeFromWatchLater(dispatch, video, token)
 				: addToWatchLater(dispatch, video, token)
-			: navigate("/login");
+			: navigation("/login");
 	};
+
+	const likeHandler = () => {
+		token
+			? video?.isInLiked
+				? removeFromlikeVideo(dispatch, video, token)
+				: addTolikeVideo(dispatch, video, token)
+			: navigation("/login", {replace: true, state: {from: location}});
+	};
+
 	return video ? (
 		<div className='single-video'>
 			<iframe
@@ -54,7 +67,11 @@ const SingleVideo = () => {
 					<h4>{video.creator}</h4>
 				</div>
 				<div className='video-options'>
-					<div className='video-option-inselect'>
+					<div
+						className={
+							video?.isInLiked ? "video-option-select" : "video-option-inselect"
+						}
+						onClick={() => likeHandler()}>
 						<i className='fas fa-thumbs-up'></i>
 						<label>Like</label>
 					</div>
@@ -87,13 +104,13 @@ const SingleVideo = () => {
 						<label>Comments :</label>
 					</div>
 					<div className='video-comments-input'>
-						<span>{userName.charAt(0).toUpperCase()}</span>
+						<span>{userName.charAt(0).toUpperCase() || "T"}</span>
 						<input
 							type='text'
 							value={commentInput}
 							onChange={(e) => setcommentInput(e.target.value)}
 							placeholder='Add a comment...'
-							onClick={() => !token && navigate("/login")}
+							onClick={() => !token && navigation("/login")}
 						/>
 						<button onClick={() => clearHandler()}>Clear</button>
 						<button

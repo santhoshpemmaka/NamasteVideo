@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router";
 import {
+	addTolikeVideo,
 	addToWatchLater,
+	removeFromlikeVideo,
 	removeFromWatchLater,
 } from "../../utils/server-request";
 import {useAuthentication} from "../../context/AuthContext";
 import {useData} from "../../context/VideoContext";
 
-const ActionButtonWatchlist = ({video}) => {
+const ActionButtonLikeVideo = ({video}) => {
 	const [showList, setshowList] = useState(false);
 	const {state, dispatch} = useData();
 	const navigate = useNavigate;
@@ -22,6 +24,15 @@ const ActionButtonWatchlist = ({video}) => {
 			: navigate("/login");
 		setshowList((prev) => !prev);
 	};
+
+	const addlikeHandler = () => {
+		token
+			? video?.isInLiked
+				? removeFromlikeVideo(dispatch, video, token)
+				: addTolikeVideo(dispatch, video, token)
+			: navigate("/login");
+		setshowList((prev) => !prev);
+	};
 	return (
 		<div className='action-btn-container'>
 			<button
@@ -31,6 +42,16 @@ const ActionButtonWatchlist = ({video}) => {
 			</button>
 			{showList && (
 				<div className='playlist-container'>
+					<button
+						className={
+							video?.isInLiked
+								? "video-action-label-active"
+								: "video-action-label-inactive"
+						}
+						onClick={() => addlikeHandler()}>
+						<i className='fas fa-clock'></i>
+						{video?.isInLiked ? "Remove Like Video" : "Add To Like Video"}
+					</button>
 					<button
 						className={
 							video?.isInWatchLater
@@ -43,16 +64,10 @@ const ActionButtonWatchlist = ({video}) => {
 							? "Remove Watch Later"
 							: "Add To Watch Later"}
 					</button>
-					<button
-						className='video-action-label-inactive'
-						onClick={() => setshowList((prev) => !prev)}>
-						<i className='fas fa-play-circle'></i>
-						Add to Play List
-					</button>
 				</div>
 			)}
 		</div>
 	);
 };
 
-export default ActionButtonWatchlist;
+export default ActionButtonLikeVideo;

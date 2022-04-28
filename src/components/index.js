@@ -5,5 +5,21 @@ import Footer from "./Footer/Footer";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import WatchLater from "./WatchLater/WatchLater";
+import LikevideoListing from "./LikeVideo/LikevideoListing";
+import HistoryVideoListing from "./HistoryVideo/HistoryVideoListing";
+import PlaylistVideoListing from "./Playlist/PlaylistVideoListing";
+import ProfileListing from "./Profile/ProfileListing";
 
-export {VideosPage, SingleListing, Header, Footer, Login, SignUp, WatchLater};
+export {
+	VideosPage,
+	SingleListing,
+	Header,
+	Footer,
+	Login,
+	SignUp,
+	WatchLater,
+	LikevideoListing,
+	HistoryVideoListing,
+	PlaylistVideoListing,
+	ProfileListing,
+};

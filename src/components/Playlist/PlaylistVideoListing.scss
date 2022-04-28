@@ -1,0 +1,53 @@
+.playlistvideo-container {
+	width: 100%;
+	display: flex;
+	grid-area: main;
+	.playlistvideo {
+		width: 85%;
+		padding: 1rem;
+		.playlistvideo-heading {
+			display: flex;
+			align-items: center;
+			font-size: 1.6rem;
+			color: var(--primary-text-color);
+			margin-left: 4rem;
+		}
+		.playlist-grid-4-column-layout {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 2rem;
+			max-width: 80rem;
+			padding: 1rem 2rem;
+			margin-left: 6rem;
+			margin-top: 5rem;
+			.link-no-style {
+				text-decoration: none;
+				border: none;
+				.card-vertical {
+					max-width: 100%;
+					display: flex;
+					position: relative;
+					background-color: var(--primary-color);
+					opacity: 0.5;
+					height: 10rem;
+					border-radius: 0.5rem;
+					cursor: pointer;
+					.overlay-text {
+						position: absolute;
+						letter-spacing: 0.2rem;
+						left: 5rem;
+						top: 3.5rem;
+						h6{
+							font-size: 2rem;
+							color: var(--complimentary-text-color);
+						}
+					}
+				}
+			}
+		}
+	}
+	.spacer-3rem {
+		height: 4rem;
+		width: 100%;
+	}
+}
