@@ -15,6 +15,7 @@ import {
 	HistoryVideoListing,
 	PlaylistVideoListing,
 	ProfileListing,
+	ErrorPage,
 } from "./components";
 import {useData} from "./context/VideoContext";
 import {getVideosServer} from "./utils/server-request";
@@ -73,6 +74,7 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+				<Route path='*' element={<ErrorPage />} />
 			</Routes>
 			<Footer />
 		</div>
