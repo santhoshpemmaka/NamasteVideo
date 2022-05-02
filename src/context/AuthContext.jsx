@@ -20,6 +20,7 @@ export const AuthenticationProvider = ({children}) => {
 		token: tokenDetails,
 		userName: userNameDetails,
 		email: email,
+		lastName: "",
 	};
 
 	const [state, dispatch] = useReducer(authenticationReducer, initialState);

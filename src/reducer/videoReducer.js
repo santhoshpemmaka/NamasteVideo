@@ -5,6 +5,7 @@ export const initialState = {
 	playlist: [],
 	sortBy: "ALL",
 	sortByDate: false,
+	search: "",
 };
 
 export const videoReducer = (state, action) => {
@@ -79,6 +80,11 @@ export const videoReducer = (state, action) => {
 				})),
 			};
 
+		case ACTION_TYPE.SEARCH:
+			return {
+				...state,
+				search: action.payload,
+			};
 		default:
 			return state;
 	}

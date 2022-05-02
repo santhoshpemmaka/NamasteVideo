@@ -19,7 +19,6 @@
 .App{
 	display: grid;
 	width: 100%;
-	grid-gap: 1rem;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-areas: 
 	"header header header header"
@@ -34,4 +33,20 @@
 	grid-area: main;
 }
 
+@media only screen and (max-width:768px){
+	.App{
+		display: grid;
+		width: 100%;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas: 
+		"header header "
+		"main   main"
+		"main   main"
+		"main   main"
+		"main   main"
+		"footer footer"
+		;
+	}
+
+}
   

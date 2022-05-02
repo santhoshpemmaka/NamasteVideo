@@ -16,6 +16,15 @@ export const authenticationReducer = (state, action) => {
 				token: "",
 				userName: "",
 			};
+
+		case "SIGNUP_USER":
+			return {
+				...state,
+				token: payload.token,
+				userName: payload.userName,
+				email: payload.email,
+				lastName: payload.lastName,
+			};
 		default:
 			return state;
 	}

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Link, useNavigate, Navigate, useLocation} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 import {useAuthentication} from "../../context/AuthContext";
 import "./Login.scss";
 const Login = () => {

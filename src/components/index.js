@@ -9,7 +9,7 @@ import LikevideoListing from "./LikeVideo/LikevideoListing";
 import HistoryVideoListing from "./HistoryVideo/HistoryVideoListing";
 import PlaylistVideoListing from "./Playlist/PlaylistVideoListing";
 import ProfileListing from "./Profile/ProfileListing";
-
+import ErrorPage from "./ErrorPage/ErrorPage";
 export {
 	VideosPage,
 	SingleListing,
@@ -22,4 +22,5 @@ export {
 	HistoryVideoListing,
 	PlaylistVideoListing,
 	ProfileListing,
+	ErrorPage,
 };
