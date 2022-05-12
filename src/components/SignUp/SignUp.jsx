@@ -29,18 +29,19 @@ const SignUp = () => {
 	const usersignupHandler = async (dispatch, signupDeatils) => {
 		try {
 			const response = await axios.post("/api/auth/signup", {
-				email: signupDeatils.email,
+				email: signupDeatils.emailName,
 				passWord: signupDeatils.passWord,
 				firstName: signupDeatils.firstName,
 				lastName: signupDeatils.lastName,
 			});
 			if (response.status === 200 || response.status === 201) {
+				console.log(response.data);
 				localStorage?.setItem(
 					"userSession",
 					JSON.stringify({
 						userName: response?.data?.createdUser?.firstName,
 						token: response?.data?.encodedToken,
-						email: signupDeatils.email,
+						email: response?.data?.createdUser.email,
 						lastName: response?.data?.lastName,
 					})
 				);
@@ -49,7 +50,7 @@ const SignUp = () => {
 					payload: {
 						userName: response?.data?.createdUser?.firstName,
 						token: response?.data?.encodedToken,
-						email: signupDeatils?.email || "sample@gmail.com",
+						email: response?.data?.createdUser.email,
 						lastName: response?.data?.createdUser?.lastName,
 					},
 				});
