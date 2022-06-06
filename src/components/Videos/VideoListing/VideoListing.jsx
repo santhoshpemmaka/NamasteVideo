@@ -4,13 +4,19 @@ import {navFilterOptions} from "../../../database";
 import AllVideosList from "./AllVideos/AllVideosList";
 import {useData} from "../../../context/VideoContext";
 import {ACTION_TYPE} from "../../../constants/constant";
+import {Link} from "react-router-dom";
 import {
 	getFilterData,
 	getFilterDate,
 	getSearchName,
 } from "./AllVideos/DataFilter";
+import {useAuthentication} from "../../../context/AuthContext";
 const VideoListing = () => {
 	const {state, dispatch} = useData();
+	const {
+		state: {token, userName, email},
+		logoutUser,
+	} = useAuthentication();
 	const searchName = getSearchName(state);
 	const filterData = getFilterDate(state, searchName);
 	const AllVideos = getFilterData(state, filterData);
@@ -56,6 +62,23 @@ const VideoListing = () => {
 					))}
 			</div>
 			<div className='spacer-3rem'></div>
+			<div className='show-only-mobile'>
+				<Link to='/' className='mobile-page-icon'>
+					<i className='fas fa-home'></i>
+				</Link>
+				<Link to='/liked' className='mobile-page-icon'>
+					<i className='fas fa-heart'></i>
+				</Link>
+				<Link to='/watchlater' className='mobile-page-icon'>
+					<i className='fas fa-clock'></i>
+				</Link>
+				<Link to='/history ' className='mobile-page-icon'>
+					<i className='fas fa-history'></i>
+				</Link>
+				<label className='mobile-page-icon' onClick={() => logoutUser()}>
+					<i className='fas fa-sign-out-alt'></i>
+				</label>
+			</div>
 		</div>
 	);
 };
