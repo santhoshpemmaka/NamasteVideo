@@ -73,6 +73,7 @@ const Login = () => {
 
 	return (
 		<>
+			<label className='show-only-heading'>Namaste</label>
 			<div className='login-container'>
 				<div className='login-component'>
 					<label className='login-heading'>LOGIN</label>

@@ -1,5 +1,5 @@
 .footer-container {
-    grid-area: footer;
+	grid-area: footer;
 	margin-top: auto;
 	footer {
 		background-color: #eaeaec;
@@ -24,8 +24,13 @@
 				width: 2rem;
 				height: 2rem;
 				margin: 0 1.5rem;
-                color: black;
+				color: black;
 			}
 		}
+	}
+}
+@media only screen and (max-width: 768px) {
+	.footer-container {
+		display: none;
 	}
 }
