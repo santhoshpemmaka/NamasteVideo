@@ -4,14 +4,20 @@ import LikeVideo from "./LikeVideo";
 import "./LikevideoListing.scss";
 import {useData} from "../../context/VideoContext";
 import {Link} from "react-router-dom";
+import {useAuthentication} from "../../context/AuthContext";
 
 const LikevideoListing = () => {
 	const {state, dispatch} = useData();
+	const {
+		state: {token, userName, email},
+		logoutUser,
+	} = useAuthentication();
 	const likedVideos =
 		state.videos && state.videos.filter((video) => video.isInLiked);
 
 	return (
 		<div className='likevideo-container'>
+			<label className='show-only-heading'>Namaste</label>
 			<NavbarFilter />
 			<div className='likevideo'>
 				<div className='likevideo-heading'>
@@ -33,8 +39,24 @@ const LikevideoListing = () => {
 						</Link>
 					</div>
 				)}
-
 				<div className='spacer-3rem'></div>
+			</div>
+			<div className='show-only-mobile'>
+				<Link to='/' className='mobile-page-icon'>
+					<i className='fas fa-home'></i>
+				</Link>
+				<Link to='/liked' className='mobile-page-icon'>
+					<i className='fas fa-heart'></i>
+				</Link>
+				<Link to='/watchlater' className='mobile-page-icon'>
+					<i className='fas fa-clock'></i>
+				</Link>
+				<Link to='/history ' className='mobile-page-icon'>
+					<i className='fas fa-history'></i>
+				</Link>
+				<label className='mobile-page-icon' onClick={() => logoutUser()}>
+					<i className='fas fa-sign-out-alt'></i>
+				</label>
 			</div>
 		</div>
 	);
