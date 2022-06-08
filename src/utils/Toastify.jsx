@@ -28,3 +28,24 @@ export const removeToLikeToastify = (text) => {
 		autoClose: 1500,
 	});
 };
+
+export const loginTouserToastify = (text) => {
+	toast.success(text, {
+		position: "top-right",
+		autoClose: 1500,
+	});
+};
+
+export const loginTouserfailToastify = (text) => {
+	toast.success(text, {
+		position: "top-right",
+		autoClose: 1500,
+	});
+};
+
+export const logoutTouserToastify = (text) => {
+	toast.success(text, {
+		position: "top-right",
+		autoClose: 1500,
+	});
+};

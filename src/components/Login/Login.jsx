@@ -2,7 +2,12 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import {useAuthentication} from "../../context/AuthContext";
+import {
+	loginTouserToastify,
+	loginTouserfailToastify,
+} from "../../utils/Toastify";
 import "./Login.scss";
+
 const Login = () => {
 	const {
 		state: {token},
@@ -54,7 +59,9 @@ const Login = () => {
 						email: response?.data?.foundUser?.email,
 					},
 				});
+				loginTouserToastify("User login succesful");
 			} else {
+				loginTouserfailToastify("User login is failed.");
 				throw new Error("Failed to login");
 			}
 		} catch (error) {

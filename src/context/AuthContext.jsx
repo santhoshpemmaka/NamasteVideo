@@ -1,7 +1,7 @@
 import {createContext, useContext, useReducer} from "react";
 import {authenticationReducer} from "../reducer/authenticationReducer";
 import {useNavigate} from "react-router";
-
+import {logoutTouserToastify} from "../utils/Toastify";
 const AuthContext = createContext();
 
 export const AuthenticationProvider = ({children}) => {
@@ -28,6 +28,7 @@ export const AuthenticationProvider = ({children}) => {
 	const logoutUser = () => {
 		localStorage?.removeItem("userSession");
 		dispatch({type: "LOGOUT_USER"});
+		logoutTouserToastify("User logout successful");
 		navigation("/");
 	};
 

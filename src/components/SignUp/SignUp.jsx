@@ -2,6 +2,10 @@ import axios from "axios";
 import React, {useState} from "react";
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import {useAuthentication} from "../../context/AuthContext";
+import {
+	loginTouserToastify,
+	loginTouserfailToastify,
+} from "../../utils/Toastify";
 import "./SignUp.scss";
 
 const SignUp = () => {
@@ -54,7 +58,9 @@ const SignUp = () => {
 						lastName: response?.data?.createdUser?.lastName,
 					},
 				});
+				loginTouserToastify("User signup successful");
 			} else {
+				loginTouserfailToastify("User signup is failed");
 				throw new Error("Failed to signup");
 			}
 		} catch (error) {
