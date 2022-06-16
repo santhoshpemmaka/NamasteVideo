@@ -20,6 +20,7 @@ const Login = () => {
 		password: "",
 		shownPassword: false,
 	});
+	const [validationFlag, setvalidationFlag] = useState(false);
 
 	if (token) {
 		setTimeout(() => {
@@ -28,6 +29,12 @@ const Login = () => {
 	}
 
 	const btnHandler = () => {
+		if (
+			loginDetails.username.length === 0 ||
+			loginDetails.password.length === 0
+		) {
+			setvalidationFlag((prev) => !prev);
+		}
 		setloginDetails({username: "", password: ""});
 	};
 	const iconHandler = () => {
@@ -94,6 +101,11 @@ const Login = () => {
 								setloginDetails({...loginDetails, username: e.target.value})
 							}
 						/>
+						{loginDetails.username.length === 0 && validationFlag && (
+							<label className='validate-data'>
+								* Email input field is required
+							</label>
+						)}
 						<div className='login-password'>
 							<input
 								className='login-input'
@@ -113,17 +125,20 @@ const Login = () => {
 									onClick={iconHandler}
 									className='fas fa-eye-slash password-icon'></i>
 							)}
+							{loginDetails.password.length === 0 && validationFlag && (
+								<label className='validate-data'>
+									* Password input field is required
+								</label>
+							)}
 						</div>
-
-						<Link className='forgot-alink' to='/'>
-							<label className='forgot-password'>Forgot your password?</label>
-						</Link>
 						<button
 							className='login-input test-credentails-btn'
 							onClick={testHandler}>
 							Login With Test Crendentails
 						</button>
-						<button className='login-input login-btn' onClick={btnHandler}>
+						<button
+							className='login-input login-btn'
+							onClick={() => btnHandler()}>
 							LOGIN
 						</button>
 						<label className='login-text'>
