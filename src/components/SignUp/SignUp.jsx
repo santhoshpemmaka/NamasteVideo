@@ -41,7 +41,6 @@ const SignUp = () => {
 				lastName: signupDeatils.lastName,
 			});
 			if (response.status === 200 || response.status === 201) {
-				console.log(response.data);
 				localStorage?.setItem(
 					"userSession",
 					JSON.stringify({
