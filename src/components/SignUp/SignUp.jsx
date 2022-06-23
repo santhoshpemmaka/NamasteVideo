@@ -7,6 +7,8 @@ import {
 	loginTouserfailToastify,
 } from "../../utils/Toastify";
 import "./SignUp.scss";
+import validator from "validator";
+import {ThreeDots} from "react-loader-spinner";
 
 const SignUp = () => {
 	const {
@@ -15,13 +17,13 @@ const SignUp = () => {
 	} = useAuthentication();
 	const navigation = useNavigate();
 	const location = useLocation();
+	const [signupMessage, setsignupMessage] = useState(false);
+	const [showLoader, setshowLoader] = useState(false);
 	const [signupDetails, setsignupDetails] = useState({
 		firstName: "",
 		lastName: "",
 		emailName: "",
 		passWord: "",
-		confirmPassword: "",
-		termsConditions: false,
 		shownPassword: false,
 	});
 	if (token) {
@@ -68,16 +70,17 @@ const SignUp = () => {
 		}
 	};
 	const signupHandler = () => {
-		usersignupHandler(dispatch, signupDetails);
-		setsignupDetails({
-			firstName: "",
-			lastName: "",
-			emailName: "",
-			passWord: "",
-			confirmPassword: "",
-			termsConditions: false,
-			shownPassword: false,
-		});
+		const {emailName, passWord, firstName, lastName} = signupDetails;
+		if (
+			emailName !== "" &&
+			passWord !== "" &&
+			firstName !== "" &&
+			lastName !== ""
+		) {
+			setshowLoader((prev) => !prev);
+			usersignupHandler(dispatch, signupDetails);
+		}
+		setsignupMessage((prev) => !prev);
 	};
 
 	const iconHandler = () => {
@@ -110,6 +113,11 @@ const SignUp = () => {
 								required
 							/>
 						</div>
+						{signupMessage && signupDetails.firstName.length === 0 && (
+							<label className='validate-message'>
+								* First Name input filed is required{" "}
+							</label>
+						)}
 						<div className='componet-signup'>
 							<label className='label-signup-name'>Last Name </label>
 							<input
@@ -123,6 +131,11 @@ const SignUp = () => {
 								required
 							/>
 						</div>
+						{signupMessage && signupDetails.lastName.length === 0 && (
+							<label className='validate-message'>
+								* Last Name input filed is required{" "}
+							</label>
+						)}
 						<div className='componet-signup'>
 							<label className='label-signup-name'>Email </label>
 							<input
@@ -139,31 +152,31 @@ const SignUp = () => {
 								required
 							/>
 						</div>
+						{signupMessage && signupDetails.emailName.length === 0 && (
+							<label className='validate-message'>
+								* Email input filed is required{" "}
+							</label>
+						)}
+						{signupDetails.emailName.length > 1 &&
+						validator.isEmail(signupDetails.emailName) === false ? (
+							<label className='validate-message'>
+								Please enter valid email
+							</label>
+						) : (
+							""
+						)}
 						<div className='componet-signup'>
 							<label className='label-signup-name'>Password </label>
-							<input
-								type='password'
-								value={signupDetails.passWord}
-								className='signup-input'
-								placeholder='Enter new password'
-								onChange={(e) =>
-									setsignupDetails({...signupDetails, passWord: e.target.value})
-								}
-								required
-							/>
-						</div>
-						<div className='componet-signup'>
-							<label className='label-signup-name'>Confirm Password </label>
 							<div className='show-password'>
 								<input
-									type={signupDetails.shownPassword ? "text" : "password"}
-									value={signupDetails.confirmPassword}
+									type='password'
+									value={signupDetails.passWord}
 									className='signup-input'
-									placeholder='Re-type your password'
+									placeholder='Enter new password'
 									onChange={(e) =>
 										setsignupDetails({
 											...signupDetails,
-											confirmPassword: e.target.value,
+											passWord: e.target.value,
 										})
 									}
 									required
@@ -179,20 +192,11 @@ const SignUp = () => {
 								)}
 							</div>
 						</div>
-						<div className='terms-conditons'>
-							<input
-								className='terms-checkbox'
-								type='checkbox'
-								checked={signupDetails.termsConditions}
-								onChange={() =>
-									setsignupDetails({
-										...signupDetails,
-										termsConditions: !signupDetails.termsConditions,
-									})
-								}
-							/>{" "}
-							<label>I accept all terms & conditions.</label>
-						</div>
+						{signupMessage && signupDetails.passWord.length === 0 && (
+							<label className='validate-message'>
+								* Password input filed is required{" "}
+							</label>
+						)}
 						<button className='register-btn' onClick={() => signupHandler()}>
 							REGISTER
 						</button>
@@ -202,6 +206,16 @@ const SignUp = () => {
 					</div>
 				</div>
 				<div className='spacer-3rem'></div>
+				{showLoader && (
+					<div className='loader-dots'>
+						<ThreeDots
+							color='#ff3f6c'
+							height={100}
+							width={100}
+							timeout={5000}
+						/>
+					</div>
+				)}
 			</div>
 		</>
 	);

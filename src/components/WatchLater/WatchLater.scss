@@ -61,6 +61,15 @@
 		display: none;
 	}
 }
+@media only screen and (max-width: 1024px) {
+	.watchlater-container {
+		.watchlist-container {
+			.video-grid-layout {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+	}
+}
 
 @media only screen and (max-width: 768px) {
 	.watchlater-container {

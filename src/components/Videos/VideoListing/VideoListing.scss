@@ -121,6 +121,17 @@
 	}
 }
 
+@media only screen and (max-width: 1024px) {
+	.video-listing-container {
+		.video-grid-layout {
+			grid-template-columns: 1fr 1fr;
+			.video-card {
+				margin-left: 0rem;
+			}
+		}
+	}
+}
+
 @media only screen and (max-width: 768px) {
 	.video-listing-container {
 		width: 100%;
