@@ -85,14 +85,14 @@ const SingleVideo = () => {
 						<i className='fas fa-clock'></i>
 						<label>Watch Later</label>
 					</div>
-					<div className='video-option-inselect'>
+					{/* <div className='video-option-inselect'>
 						<i className='fas fa-copy'></i>
 						<label>Copy</label>
 					</div>
 					<div className='video-option-inselect'>
 						<i className='fas fa-share-alt'></i>
 						<label>Share</label>
-					</div>
+					</div> */}
 				</div>
 				<div className='video-description'>
 					<label>Description :</label>
