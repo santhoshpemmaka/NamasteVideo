@@ -80,6 +80,7 @@ export const videoReducer = (state, action) => {
 				})),
 			};
 
+
 		case ACTION_TYPE.SEARCH:
 			return {
 				...state,
